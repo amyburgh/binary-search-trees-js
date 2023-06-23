@@ -171,14 +171,27 @@ class Tree {
     this.root = this.buildTree(arr)
   }
 
-  prettyPrint(node = this.root, prefix = '', isLeft = true) {
+  prettyPrint(node = this.root, prefix = '', isLeft = true, arr = []) {
     if (!node) return
     if (node.right) {
-      prettyPrint(node.right, `${prefix}${isLeft ? '│   ' : '    '}`, false)
+      this.prettyPrint(
+        node.right,
+        `${prefix}${isLeft ? '│   ' : '    '}`,
+        false,
+        arr
+      )
     }
-    console.log(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`)
+    arr.push(`${prefix}${isLeft ? '└── ' : '┌── '}${node.data}`)
     if (node.left) {
-      prettyPrint(node.left, `${prefix}${isLeft ? '    ' : '│   '}`, true)
+      this.prettyPrint(
+        node.left,
+        `${prefix}${isLeft ? '    ' : '│   '}`,
+        true,
+        arr
+      )
     }
+    return arr
   }
 }
+
+module.exports = Tree
