@@ -1,7 +1,7 @@
 const Tree = require('./binarySearchTree')
 
 function createArray(size) {
-  return [...new Array(size)].map(() => Math.floor(Math.random() * size))
+  return [...new Array(size)].map(() => Math.floor(Math.random() * 100))
 }
 
 function unBalance(size) {
@@ -9,22 +9,36 @@ function unBalance(size) {
   rand.forEach((elem) => tree.insert(elem))
 }
 
-function print() {
-  console.log('Balanced:', tree.isBalanced())
+function printTests() {
+  // console.log('Balanced:', tree.isBalanced())
   console.log('Lever Order:', tree.levelOrder())
-  console.log('Preorder: ', tree.preorder())
+  console.log('Preorder:', tree.preorder())
   console.log('Inorder:', tree.inorder())
   console.log('Postorder:', tree.postorder())
 }
 
-const tree = new Tree(createArray(20))
+function printTree() {
+  let arr = tree.prettyPrint()
+  arr.forEach((e) => console.log(e))
+}
 
-let arr = tree.prettyPrint()
-arr.forEach((e) => console.log(e))
-print()
-unBalance(10)
-arr = tree.prettyPrint()
-arr.forEach((e) => console.log(e))
-console.log('Balanced:', tree.isBalanced())
+const tree = new Tree(createArray(10))
+
+console.log(
+  `\n========== ${tree.isBalanced() ? ' Balanced ' : 'unBalanced'} ==========\n`
+)
+printTree()
+// printTests()
+
+unBalance(5)
+console.log(
+  `\n========== ${tree.isBalanced() ? ' Balanced ' : 'unBalanced'} ==========\n`
+)
+printTree()
+
 tree.rebalance()
-print()
+console.log(
+  `\n========== ${tree.isBalanced() ? ' Balanced ' : 'unBalanced'} ==========\n`
+)
+printTree()
+// printTests()
